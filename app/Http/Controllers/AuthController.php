@@ -32,7 +32,6 @@ class AuthController extends Controller
     // Mostrar formulario de login
     public function showLogin()
     {
-        return response()->json('asdsad', 200);
         return view('auth.login');
     }
     // Procesar login
