@@ -18,3 +18,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/perfil', [PerfilController::class, 'index']);
     Route::post('/actualizar/perfil', [PerfilController::class, 'update']);
 });
+
+Route::post('/hola', function () {
+    return response()->json([
+        'mensaje' => 'Hola mundo desde API'
+    ]);
+});
+

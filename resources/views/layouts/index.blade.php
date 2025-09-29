@@ -7,6 +7,8 @@
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
     <script src="{{asset('assets/js/plugin/webfont/webfont.min.js')}}"></script>
+    <meta name="url" content="{{url('/')}}">
+    <meta name="token" content="{{csrf_token()}}">
     <script>
         WebFont.load({
             google: {
@@ -390,6 +392,9 @@
             <div class="container">
                 <div class="page-inner">
                     @yield('content')
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
             </div>
 
@@ -466,21 +471,48 @@
             fillColor: "rgba(255, 165, 52, .14)",
         });
     </script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+            }
+        })
+
+        $.ajax({
+            url: $('meta[name="url"]').attr('content') + '/hola',
+            method: 'POST',
+            dataType: 'json',
+            beforeSend(){
+
+            },
+            success: data => {
+                $('div[class="spinner-border"]').remove()
+                console.log(data)
+            },
+            error(error) {
+                console.log(error);
+            },
+            complete(){
+
+            }
+        });
+    </script>
     @yield('js')
 
     @if(session('alert'))
     <script>
         $.notify({
-        	icon: 'icon-check',
-        	title: '{{session("alert")[1]}}',
-        	message: '{{session("alert")[2]}}',
+            icon: 'icon-check',
+            title: '{{session("alert")[1]}}',
+            message: '{{session("alert")[2]}}',
         }, {
-        	type: '{{session("alert")[0]}}',
-        	placement: {
-        		from: "bottom",
-        		align: "right"
-        	},
-        	time: 1000,
+            type: '{{session("alert")[0]}}',
+            placement: {
+                from: "bottom",
+                align: "right"
+            },
+            time: 1000,
         });
     </script>
     @endif
