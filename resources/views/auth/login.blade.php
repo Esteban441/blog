@@ -25,7 +25,8 @@
                     <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                <div class="col-12 text-center">
+                <div class="col-12 d-flex justify-content-between">
+                    <a href="{{url('/register')}}" class="btn btn-secondary">Registrarse</a>
                     <button class="btn btn-primary">Ingresar</button>
                 </div>
             </form>

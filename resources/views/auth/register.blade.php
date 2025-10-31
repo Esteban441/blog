@@ -8,7 +8,7 @@
         </h4>
     </div>
     <div class="card-body">
-        <div class="containers">
+        <div class="container-fluid">
             <form class="row" action="{{route('register')}}" method="POST">
                 @csrf
                 <div class="col-12 mb-3">
@@ -39,7 +39,8 @@
                     <small class="text-danger">{{$message}}</small>
                     @enderror
                 </div>
-                <div class="col-12 text-center">
+                <div class="col-12 d-flex justify-content-between">
+                    <a href="{{url('/login')}}" class="btn btn-secondary">Logearse</a>
                     <button class="btn btn-primary">Registrarse</button>
                 </div>
             </form>
